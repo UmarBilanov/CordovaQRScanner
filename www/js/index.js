@@ -16,8 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import * as cordova from "../../plugins/cordova-plugin-qrscanner/webpack.library.config";
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -29,21 +27,20 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-
         this.receivedEvent('deviceready');
 
         document.querySelector("#prepare").addEventListener("touchend", function() {
-            cordova.plugins.QRScanner.prepare(onDone); // show the prompt
+            window.QRScanner.prepare(onDone); // show the prompt
 
         });
 
         document.querySelector("#show").addEventListener("touchend", function() {
-            cordova.plugins.QRScanner.show();
+            window.QRScanner.show();
 
         });
 
         document.querySelector("#scan").addEventListener("touchend", function() {
-            cordova.plugins.QRScanner.scan(displayContents);
+            window.QRScanner.scan(displayContents);
 
         });
 
@@ -68,14 +65,12 @@ var app = {
 
         function displayContents(err, text){
             if(err){
-                alert(err)
                 // an error occurred, or the scan was canceled (error code `6`)
             } else {
                 // The scan completed, display the contents of the QR code:
                 alert(text);
             }
         }
-
     },
 
     // Update DOM on a Received Event
@@ -92,4 +87,3 @@ var app = {
 };
 
 app.initialize();
-
